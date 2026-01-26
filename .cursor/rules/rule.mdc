@@ -1,6 +1,6 @@
 ---
 alwaysApply: true
-priority: 200
+priority: 999
 ---
 1-Always explain before writing code
 

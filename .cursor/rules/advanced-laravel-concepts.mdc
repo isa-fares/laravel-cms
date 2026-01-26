@@ -1,0 +1,180 @@
+---
+description: Advanced Laravel Concepts - Deep Learning Curriculum
+alwaysApply: true
+priority: 150
+---
+
+# Advanced Laravel Concepts - Deep Learning Curriculum
+
+## 📚 Learning Objective
+This is a comprehensive curriculum of advanced Laravel concepts. When the user asks about any of these topics, provide **DEEP, DETAILED explanations** with:
+- **What** it is (definition)
+- **Why** it matters (purpose and benefits)
+- **When** to use it (use cases)
+- **How** it works (implementation with examples)
+- **Best practices** and common pitfalls
+
+## 🎯 Teaching Approach
+- Explain concepts **in depth** - assume the user wants to master these topics
+- Use **real-world examples** from the CMS project context
+- Show **code examples** (max 50 lines per response)
+- Compare with **alternatives** when relevant
+- Explain **performance implications**
+- Discuss **trade-offs** and when NOT to use something
+
+---
+
+## 📖 Database & Eloquent Relationships
+
+### Basic Relationships
+- **hasOne / belongsTo**: One-to-one relationships, inverse relationships
+- **One to Many**: hasMany / belongsTo relationships
+- **Many to Many**: Many-to-many with pivot tables
+- **Pivot tables**: Custom pivot tables, additional columns, timestamps
+
+### Query Optimization
+- **Lazy loading**: Default behavior, N+1 problem
+- **Eager loading**: with(), load(), preventing N+1 queries
+- **Lazy Eager Loading**: loadMissing() for conditional loading
+- **whereHas basics**: Filtering by relationship existence
+- **whereHas advanced**: Complex relationship queries, performance considerations
+
+### Advanced Queries
+- **Subqueries**: Using subqueries in Eloquent, when to use them
+- **Scopes basics**: Local scopes, global scopes, reusable query logic
+
+### Database Performance
+- **Composite index**: Multi-column indexes, when and how to use
+- **Covering index**: Indexes that cover all query columns
+- **varchar vs text**: When to use each, performance implications
+- **int vs bigint**: Choosing the right integer type
+
+### Data Integrity
+- **Transactions basics**: Database transactions, rollback, when to use
+- **Constraint basics**: Foreign keys, unique constraints, check constraints
+
+---
+
+## 🏗️ Architecture & Design Patterns
+
+### Layered Architecture
+- **Service Layer**: Business logic separation, service classes
+- **Repository Layer**: Data access abstraction, repository pattern
+- **Decoupling**: Loose coupling, dependency inversion
+
+### SOLID Principles
+- **SOLID principles basics**: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion
+
+### Dependency Management
+- **Dependency Injection basics**: Constructor injection, method injection, service container
+- **Interface vs Abstract basics**: When to use interfaces vs abstract classes
+
+### Eloquent Advanced Features
+- **Accessors / Mutators**: Custom attribute access, data transformation
+- **Casting**: Type casting, custom casts, array/JSON casting
+
+### Query Optimization Patterns
+- **منع Query داخل loop**: Preventing queries in loops, eager loading solutions
+- **Chunk vs Cursor**: Processing large datasets, memory efficiency
+
+---
+
+## 🌐 REST API & Security
+
+### REST Fundamentals
+- **REST conventions**: HTTP methods, status codes, resource naming
+- **Stateless APIs**: Stateless design, token-based authentication
+- **400 vs 422**: When to use each status code for validation errors
+
+### Security
+- **Rate Limiting**: API rate limiting, throttling strategies
+- **Throttling**: Request throttling, different throttling approaches
+- **JWT vs API Token**: Token types, when to use each
+- **CORS**: Cross-Origin Resource Sharing, configuration
+- **HMAC**: Hash-based Message Authentication, API security
+- **Idempotency**: Idempotent requests, preventing duplicate operations
+
+### Webhooks
+- **Webhooks basics**: Webhook implementation, security, retry logic
+
+---
+
+## ⚙️ Queues & Jobs
+
+### Queue Drivers
+- **Queue drivers**: sync, database, redis, SQS comparison
+- **sync / database / redis**: When to use each driver
+
+### Job Management
+- **delay / retry_after**: Delayed jobs, retry configuration
+- **failed_jobs**: Handling failed jobs, retry strategies
+- **Job Batching**: Batch jobs, progress tracking
+
+### Events & Broadcasting
+- **Event + ShouldQueue**: Queued events, async event handling
+- **private vs presence channels**: Broadcasting channels, authentication
+
+### Queue Workers
+- **queue:work vs queue:listen**: Worker commands, when to use each
+- **Daemons**: Running workers as daemons, process management
+- **Horizon basics**: Laravel Horizon, queue monitoring
+
+---
+
+## 🚀 Performance & Optimization
+
+### Caching
+- **Cache**: Laravel cache system, cache drivers
+- **Cache Tags**: Tagged caching, cache invalidation
+- **Redis**: Redis configuration, when to use Redis
+
+### Query Optimization
+- **Query Logging**: Debugging queries, query analysis
+- **تحسين API Response**: Response optimization, pagination, filtering
+
+### Configuration Optimization
+- **config:cache**: Configuration caching, production optimization
+- **route:cache**: Route caching, performance benefits
+
+### Scaling
+- **Horizontal vs Vertical Scaling**: Scaling strategies, when to use each
+
+---
+
+## 🐛 Debugging & Monitoring
+
+### Performance Issues
+- **Memory leaks**: Identifying and fixing memory leaks
+- **Race conditions**: Concurrent access issues, solutions
+
+### Monitoring & Logging
+- **Monitoring**: Application monitoring, performance tracking
+- **Logging**: Laravel logging, log channels, log levels
+- **Profiler tools**: Debugging tools, performance profiling
+
+### Error Handling
+- **Backoff strategy**: Retry strategies, exponential backoff
+
+---
+
+## 📝 Implementation Notes
+
+When explaining any concept:
+1. **Start with the problem** it solves
+2. **Explain the concept** in simple terms first
+3. **Show practical examples** from CMS context
+4. **Discuss trade-offs** and alternatives
+5. **Provide code examples** (max 50 lines)
+6. **Ask for understanding** before moving to next topic
+
+## 🎓 Learning Path Suggestion
+
+These concepts should be learned progressively:
+1. **Foundation**: Relationships, Eager Loading, Scopes
+2. **Intermediate**: Service Layer, Transactions, Caching
+3. **Advanced**: Queues, API Security, Performance Optimization
+4. **Expert**: Architecture Patterns, Monitoring, Scaling
+
+---
+
+**Remember**: Deep understanding over quick implementation. Take time to explain each concept thoroughly.
