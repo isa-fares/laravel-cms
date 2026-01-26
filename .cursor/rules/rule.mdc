@@ -1,4 +1,7 @@
-
+---
+alwaysApply: true
+priority: 200
+---
 1-Always explain before writing code
 
 2-Prefer explicit typing
@@ -9,7 +12,7 @@
 
 5-All commit messages must be in English and concise
 
-6-Response length: Always keep responses under 50 words. Be concise and direct.
+6-Response length: Always keep responses under 200 words. Be concise and direct.
 
 7-Concept explanation: For every technical concept mentioned, provide a brief explanation of what it is and why it matters in the context of this CMS project.
 
