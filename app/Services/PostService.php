@@ -3,10 +3,17 @@
 namespace App\Services;
 
 use App\Models\Post;
-use App\Models\User;
+use App\Repositories\PostRepository;
 
 class PostService
 {
+    protected $postRepository;
+
+    public function __construct(PostRepository $postRepository)
+    {
+        $this->postRepository = $postRepository;
+    }
+
     /**
      * Get all posts ordered by latest
      *
@@ -14,7 +21,7 @@ class PostService
      */
     public function getAllPosts()
     {
-        return Post::latest()->get();
+        return $this->postRepository->getAll();
     }
 
     /**
@@ -24,7 +31,7 @@ class PostService
      */
     public function getUsers()
     {
-        return User::all();
+        return $this->postRepository->getUsers();
     }
 
     /**
@@ -35,7 +42,7 @@ class PostService
      */
     public function createPost(array $data)
     {
-        return Post::create($data);
+        return $this->postRepository->create($data);
     }
 
     /**
@@ -47,7 +54,7 @@ class PostService
      */
     public function updatePost(Post $post, array $data)
     {
-        return $post->update($data);
+        return $this->postRepository->update($post, $data);
     }
 
     /**
@@ -58,6 +65,6 @@ class PostService
      */
     public function deletePost(Post $post)
     {
-        return $post->delete();
+        return $this->postRepository->delete($post);
     }
 }
