@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 class PostController extends Controller
 {
     /**
@@ -13,8 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
-        $posts = Post::latest()->paginate(10);
+        $posts = Post::latest()->get();
         return view('posts.index', compact('posts'));
     }
 
@@ -25,8 +26,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
-        return view('posts.create');
+        $users = User::all();
+        return view('posts.create', compact('users'));
     }
 
     /**
@@ -35,19 +36,12 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'slug' => 'required|string|max:255|unique:posts',
-            'status' => 'required|string|max:255',
-            'author_id' => 'required|exists:users,id',
-        ]);
-        Post::create($validated);
-        return redirect()->route('posts.index')->with('success', 'Post created successfully');
+        Post::create($request->validated());
+
+        return redirect()->route('posts.index')
+            ->with('success', 'Post created successfully.');
     }
 
     /**
@@ -56,10 +50,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
-        $post = Post::find($id);
         return view('posts.show', compact('post'));
     }
 
@@ -69,11 +61,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
-        $post = Post::find($id);
-        return view('posts.edit', compact('post'));
+        $users = User::all();
+        return view('posts.edit', compact('post', 'users'));
     }
 
     /**
@@ -83,20 +74,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-        //
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'slug' => 'required|string|max:255|unique:posts',
-            'status' => 'required|string|max:255',
-            'author_id' => 'required|exists:users,id',
-        ]);
-        $post = Post::find($id);
-        $post->update($validated);
-        return redirect()->route('posts.index')->with('success', 'Post updated successfully');
+        $post->update($request->validated());
+
+        return redirect()->route('posts.index')
+            ->with('success', 'Post updated successfully.');
     }
 
     /**
@@ -105,8 +88,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('posts.index')
+            ->with('success', 'Post deleted successfully.');
     }
 }
