@@ -3,24 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Actions\GetAllPostsAction;
-use App\Actions\GetUsersAction;
-use App\Actions\CreatePostAction;
-use App\Actions\UpdatePostAction;
-use App\Actions\DeletePostAction;
+use App\Services\PostService;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 
 class PostController extends Controller
 {
+    protected $postService;
+
+    public function __construct(PostService $postService)
+    {
+        $this->postService = $postService;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(GetAllPostsAction $action)
+    public function index()
     {
-        $posts = $action->execute();
+        $posts = $this->postService->getAll();
         return view('posts.index', compact('posts'));
     }
 
@@ -29,9 +32,9 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(GetUsersAction $action)
+    public function create()
     {
-        $users = $action->execute();
+        $users = $this->postService->getUsers();
         return view('posts.create', compact('users'));
     }
 
@@ -41,9 +44,9 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePostRequest $request, CreatePostAction $action)
+    public function store(StorePostRequest $request)
     {
-        $action->execute($request->validated());
+        $this->postService->create($request->validated());
 
         return redirect()->route('posts.index')
             ->with('success', 'Post created successfully.');
@@ -66,9 +69,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post, GetUsersAction $action)
+    public function edit(Post $post)
     {
-        $users = $action->execute();
+        $users = $this->postService->getUsers();
         return view('posts.edit', compact('post', 'users'));
     }
 
@@ -79,9 +82,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePostRequest $request, Post $post, UpdatePostAction $action)
+    public function update(UpdatePostRequest $request, Post $post)
     {
-        $action->execute($post, $request->validated());
+        $this->postService->update($post, $request->validated());
 
         return redirect()->route('posts.index')
             ->with('success', 'Post updated successfully.');
@@ -93,9 +96,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post, DeletePostAction $action)
+    public function destroy(Post $post)
     {
-        $action->execute($post);
+        $this->postService->delete($post);
 
         return redirect()->route('posts.index')
             ->with('success', 'Post deleted successfully.');
